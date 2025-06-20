@@ -1,0 +1,27 @@
+GITHUB UPLOAD INSTRUCTIONS
+==========================
+
+1. Go to: https://github.com/ChooPersonal/project-management
+
+2. Click "Add file" -> "Upload files"
+
+3. Upload ALL files and folders from this deployment-files directory:
+   - client/ (folder)
+   - server/ (folder) 
+   - shared/ (folder)
+   - .do/ (folder)
+   - package.json
+   - package-lock.json
+   - Dockerfile
+   - .gitignore
+   - README.md
+   - FINAL_DEPLOYMENT_STEPS.md
+   - All .ts and .js config files
+
+4. Commit message: "Initial deployment setup"
+
+5. Commit directly to main branch
+
+6. Return to DigitalOcean App Platform - the main branch will now appear
+
+Total files to upload: All contents of this deployment-files folder

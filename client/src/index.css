@@ -1,0 +1,428 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 222.2 84% 4.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 84% 4.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 84% 4.9%;
+    --primary: 221.2 83.2% 53.3%;
+    --primary-foreground: 210 40% 98%;
+    --secondary: 210 40% 96%;
+    --secondary-foreground: 222.2 84% 4.9%;
+    --muted: 210 40% 96%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+    --accent: 210 40% 96%;
+    --accent-foreground: 222.2 84% 4.9%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 221.2 83.2% 53.3%;
+    --chart-1: 12 76% 61%;
+    --chart-2: 173 58% 39%;
+    --chart-3: 197 37% 24%;
+    --chart-4: 43 74% 66%;
+    --chart-5: 27 87% 67%;
+    --radius: 0.75rem;
+  }
+
+  .dark {
+    --background: 222.2 84% 4.9%;
+    --foreground: 210 40% 98%;
+    --card: 222.2 84% 4.9%;
+    --card-foreground: 210 40% 98%;
+    --popover: 222.2 84% 4.9%;
+    --popover-foreground: 210 40% 98%;
+    --primary: 217.2 91.2% 59.8%;
+    --primary-foreground: 222.2 84% 4.9%;
+    --secondary: 217.2 32.6% 17.5%;
+    --secondary-foreground: 210 40% 98%;
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+    --accent: 217.2 32.6% 17.5%;
+    --accent-foreground: 210 40% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 224.3 76.3% 94.1%;
+    --chart-1: 220 70% 50%;
+    --chart-2: 160 60% 45%;
+    --chart-3: 30 80% 55%;
+    --chart-4: 280 65% 60%;
+    --chart-5: 340 75% 55%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+/* Enhanced Code Block Syntax Highlighting */
+.ProseMirror pre,
+.ProseMirror .hljs {
+  background: #1e1e1e !important;
+  color: #d4d4d4 !important;
+  font-family: 'JetBrains Mono', 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  overflow-x: auto;
+  margin: 1rem 0;
+  position: relative;
+  border: 1px solid #333;
+  min-height: 2.5rem;
+}
+
+.ProseMirror pre code,
+.ProseMirror .hljs code {
+  background: none !important;
+  color: inherit !important;
+  font-size: 0.875rem;
+  padding: 0;
+  border-radius: 0;
+  font-family: inherit;
+}
+
+/* Language label */
+.ProseMirror pre::before,
+.ProseMirror .hljs::before {
+  content: attr(data-language);
+  position: absolute;
+  top: 0.5rem;
+  right: 0.75rem;
+  background: #333;
+  color: #888;
+  padding: 0.125rem 0.5rem;
+  border-radius: 0.25rem;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  font-weight: 500;
+  z-index: 1;
+}
+
+/* Syntax highlighting colors */
+.ProseMirror .hljs-keyword { color: #569cd6 !important; }
+.ProseMirror .hljs-string { color: #ce9178 !important; }
+.ProseMirror .hljs-comment { color: #6a9955 !important; font-style: italic; }
+.ProseMirror .hljs-number { color: #b5cea8 !important; }
+.ProseMirror .hljs-built_in { color: #4ec9b0 !important; }
+.ProseMirror .hljs-function { color: #dcdcaa !important; }
+.ProseMirror .hljs-variable { color: #9cdcfe !important; }
+.ProseMirror .hljs-type { color: #4ec9b0 !important; }
+.ProseMirror .hljs-class { color: #4ec9b0 !important; }
+.ProseMirror .hljs-tag { color: #569cd6 !important; }
+.ProseMirror .hljs-attribute { color: #92c5f8 !important; }
+.ProseMirror .hljs-property { color: #9cdcfe !important; }
+.ProseMirror .hljs-operator { color: #d4d4d4 !important; }
+.ProseMirror .hljs-punctuation { color: #cccccc !important; }
+.ProseMirror .hljs-selector-tag { color: #d7ba7d !important; }
+.ProseMirror .hljs-selector-class { color: #d7ba7d !important; }
+.ProseMirror .hljs-selector-id { color: #d7ba7d !important; }
+.ProseMirror .hljs-title { color: #dcdcaa !important; }
+.ProseMirror .hljs-literal { color: #569cd6 !important; }
+.ProseMirror .hljs-regexp { color: #d16969 !important; }
+.ProseMirror .hljs-meta { color: #569cd6 !important; }
+
+/* Dark theme code blocks */
+.dark .ProseMirror pre {
+  background: #0d1117 !important;
+  color: #e6edf3 !important;
+  border: 2px solid #30363d !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25) !important;
+}
+
+.dark .ProseMirror pre[data-language]::before {
+  background: #21262d;
+  color: #7d8590;
+}
+
+.dark .prose pre,
+.dark .description-content pre,
+.dark [class*="description"] pre {
+  background: #0d1117 !important;
+  color: #e6edf3 !important;
+  border: 2px solid #30363d !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25) !important;
+}
+
+/* Light theme code blocks */
+.light .ProseMirror pre {
+  background: #f6f8fa !important;
+  color: #24292f !important;
+  border: 2px solid #d0d7de !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05) !important;
+}
+
+.light .ProseMirror pre[data-language]::before {
+  background: #ffffff;
+  color: #656d76;
+  border: 1px solid #d0d7de;
+}
+
+.light .prose pre,
+.light .description-content pre,
+.light [class*="description"] pre {
+  background: #f6f8fa !important;
+  color: #24292f !important;
+  border: 2px solid #d0d7de !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05) !important;
+}
+
+/* Light theme syntax colors */
+.light .hljs-keyword { color: #cf222e; }
+.light .hljs-string { color: #0a3069; }
+.light .hljs-comment { color: #6f42c1; font-style: italic; }
+.light .hljs-number { color: #0550ae; }
+.light .hljs-built_in { color: #8250df; }
+.light .hljs-function { color: #8250df; }
+.light .hljs-variable { color: #0550ae; }
+.light .hljs-type { color: #8250df; }
+.light .hljs-class { color: #8250df; }
+.light .hljs-tag { color: #116329; }
+.light .hljs-attribute { color: #0550ae; }
+.light .hljs-property { color: #0550ae; }
+.light .hljs-operator { color: #24292f; }
+.light .hljs-punctuation { color: #24292f; }
+.light .hljs-title { color: #8250df; }
+.light .hljs-literal { color: #cf222e; }
+.light .hljs-regexp { color: #cf222e; }
+.light .hljs-meta { color: #cf222e; }
+
+/* Inline code styling */
+.ProseMirror code {
+  background: rgba(175, 184, 193, 0.2);
+  padding: 0.125rem 0.25rem;
+  border-radius: 0.25rem;
+  font-family: 'JetBrains Mono', 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+  font-size: 0.875rem;
+}
+
+.dark .ProseMirror code {
+  background: rgba(110, 118, 129, 0.4);
+}
+
+.light .ProseMirror code {
+  background: rgba(175, 184, 193, 0.2);
+}
+
+/* Image styling in rich text editor */
+.ProseMirror img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 0.5rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  margin: 1rem 0;
+  display: block;
+}
+
+.notion-image {
+  max-width: 100%;
+  height: auto;
+  border-radius: 0.5rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  margin: 1rem 0;
+  display: block;
+}
+
+/* Image captions */
+.ProseMirror img + p {
+  font-size: 0.875rem;
+  color: #6b7280;
+  text-align: center;
+  font-style: italic;
+  margin-top: 0.5rem;
+}
+
+/* Force code block styling to override any conflicting styles */
+.code-block-container pre,
+.notion-text-editor pre,
+.ProseMirror pre,
+pre[class*="language-"],
+.hljs {
+  background: #1e1e1e !important;
+  color: #d4d4d4 !important;
+  border: 2px solid #404040 !important;
+  padding: 1rem !important;
+  border-radius: 0.5rem !important;
+  font-family: 'JetBrains Mono', 'Monaco', 'Menlo', 'Ubuntu Mono', monospace !important;
+  margin: 1rem 0 !important;
+  position: relative !important;
+  overflow-x: auto !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15) !important;
+}
+
+/* Override prose styles that might interfere */
+.prose pre {
+  background: #1e1e1e !important;
+  color: #d4d4d4 !important;
+  border: 2px solid #404040 !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15) !important;
+}
+
+.prose code {
+  background: #1e1e1e !important;
+  color: #d4d4d4 !important;
+}
+
+/* Enhanced code block borders for description view */
+.prose pre,
+.description-content pre,
+[class*="description"] pre {
+  border: 2px solid #404040 !important;
+  border-radius: 0.5rem !important;
+  background: #1e1e1e !important;
+  padding: 1rem !important;
+  margin: 1rem 0 !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15) !important;
+  position: relative !important;
+}
+
+:root {
+  --background: hsl(0, 0%, 100%);
+  --foreground: hsl(240, 10%, 3.9%);
+  --muted: hsl(210, 40%, 98%);
+  --muted-foreground: hsl(215, 13%, 65%);
+  --popover: hsl(0, 0%, 100%);
+  --popover-foreground: hsl(240, 10%, 3.9%);
+  --card: hsl(0, 0%, 100%);
+  --card-foreground: hsl(240, 10%, 3.9%);
+  --border: hsl(214, 32%, 91%);
+  --input: hsl(214, 32%, 91%);
+  --primary: hsl(217, 91%, 60%);
+  --primary-foreground: hsl(222, 84%, 4.9%);
+  --secondary: hsl(210, 40%, 98%);
+  --secondary-foreground: hsl(222, 84%, 4.9%);
+  --accent: hsl(210, 40%, 98%);
+  --accent-foreground: hsl(222, 84%, 4.9%);
+  --destructive: hsl(0, 84%, 60%);
+  --destructive-foreground: hsl(210, 40%, 98%);
+  --ring: hsl(217, 91%, 60%);
+  --radius: 0.5rem;
+  
+  /* Notion-inspired colors */
+  --notion-gray-50: hsl(210, 40%, 98%);
+  --notion-gray-100: hsl(210, 40%, 96%);
+  --notion-gray-200: hsl(214, 32%, 91%);
+  --notion-gray-300: hsl(213, 27%, 84%);
+  --notion-gray-400: hsl(215, 20%, 65%);
+  --notion-gray-500: hsl(215, 16%, 47%);
+  --notion-gray-600: hsl(215, 19%, 35%);
+  --notion-gray-700: hsl(215, 25%, 27%);
+  --notion-gray-800: hsl(217, 33%, 17%);
+  --notion-gray-900: hsl(222, 84%, 4.9%);
+}
+
+.dark {
+  --background: hsl(222, 84%, 4.9%);
+  --foreground: hsl(210, 40%, 98%);
+  --muted: hsl(217, 32%, 17%);
+  --muted-foreground: hsl(215, 20%, 65%);
+  --popover: hsl(222, 84%, 4.9%);
+  --popover-foreground: hsl(210, 40%, 98%);
+  --card: hsl(222, 84%, 4.9%);
+  --card-foreground: hsl(210, 40%, 98%);
+  --border: hsl(217, 32%, 17%);
+  --input: hsl(217, 32%, 17%);
+  --primary: hsl(217, 91%, 60%);
+  --primary-foreground: hsl(222, 84%, 4.9%);
+  --secondary: hsl(217, 32%, 17%);
+  --secondary-foreground: hsl(210, 40%, 98%);
+  --accent: hsl(217, 32%, 17%);
+  --accent-foreground: hsl(210, 40%, 98%);
+  --destructive: hsl(0, 62%, 30%);
+  --destructive-foreground: hsl(210, 40%, 98%);
+  --ring: hsl(217, 91%, 60%);
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+    font-family: 'Inter', system-ui, sans-serif;
+  }
+}
+
+@layer components {
+  .notion-sidebar {
+    @apply bg-white border-r border-gray-200;
+  }
+  
+  .notion-card {
+    @apply bg-white rounded-lg border border-gray-200 hover:shadow-lg transition-shadow;
+  }
+  
+  .notion-button-primary {
+    @apply bg-blue-600 text-white hover:bg-blue-700 transition-colors;
+  }
+  
+  .notion-text-editor {
+    @apply prose prose-sm max-w-none;
+  }
+  
+  .notion-text-editor .ProseMirror {
+    @apply outline-none min-h-[120px] p-3;
+  }
+  
+  .notion-text-editor .ProseMirror h1 {
+    @apply text-2xl font-bold mb-4;
+  }
+  
+  .notion-text-editor .ProseMirror h2 {
+    @apply text-xl font-semibold mb-3;
+  }
+  
+  .notion-text-editor .ProseMirror h3 {
+    @apply text-lg font-medium mb-2;
+  }
+  
+  .notion-text-editor .ProseMirror p {
+    @apply mb-2;
+  }
+  
+  .notion-text-editor .ProseMirror ul {
+    @apply list-disc list-inside mb-2;
+  }
+  
+  .notion-text-editor .ProseMirror ol {
+    @apply list-decimal list-inside mb-2;
+  }
+  
+  .notion-text-editor .ProseMirror strong {
+    @apply font-semibold;
+  }
+  
+  .notion-text-editor .ProseMirror em {
+    @apply italic;
+  }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: hsl(var(--muted-foreground) / 0.3);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: hsl(var(--muted-foreground) / 0.5);
+}
