@@ -1,0 +1,39 @@
+name: xover-management
+services:
+- name: web
+  source_dir: /
+  github:
+    repo: ChooPersonal/project-management
+    branch: main
+  run_command: npm start
+  build_command: npm ci && npm run build
+  environment_slug: node-js
+  instance_count: 1
+  instance_size_slug: basic-xxs
+  routes:
+  - path: /
+  envs:
+  - key: NODE_ENV
+    value: production
+  - key: DATABASE_URL
+    value: ${db.DATABASE_URL}
+  - key: SESSION_SECRET
+    value: ${SESSION_SECRET}
+  - key: SENDGRID_API_KEY
+    value: ${SENDGRID_API_KEY}
+    type: SECRET
+  - key: NOTION_INTEGRATION_SECRET
+    value: ${NOTION_INTEGRATION_SECRET}
+    type: SECRET
+  - key: NOTION_PAGE_URL
+    value: ${NOTION_PAGE_URL}
+    type: SECRET
+
+databases:
+- name: db
+  engine: PG
+  size: basic
+  num_nodes: 1
+  version: "15"
+
+static_sites: []
