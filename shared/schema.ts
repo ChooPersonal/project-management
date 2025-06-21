@@ -32,6 +32,9 @@ export const projects = pgTable("projects", {
   createdBy: integer("created_by").references(() => users.id).notNull(),
   teamMembers: integer("team_members").array().default([]),
   attachments: jsonb("attachments").default([]), // Array of file objects
+  shareToken: text("share_token").unique(),
+  shareExpiry: timestamp("share_expiry"),
+  isPubliclyShared: boolean("is_publicly_shared").default(false),
 });
 
 export const projectDescriptions = pgTable("project_descriptions", {

@@ -711,6 +711,60 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
+  // Project sharing routes
+  app.post('/api/projects/:id/share', async (req, res) => {
+    try {
+      const projectId = parseInt(req.params.id);
+      if (isNaN(projectId)) {
+        return res.status(400).json({ error: 'Invalid project ID' });
+      }
+
+      const { expiryDays = 30 } = req.body;
+      const token = await storage.generateShareToken(projectId, expiryDays);
+      
+      const shareUrl = `${req.protocol}://${req.get('host')}/shared/${token}`;
+      res.json({ token, shareUrl, expiryDays });
+    } catch (error) {
+      console.error('Failed to generate share token:', error);
+      res.status(500).json({ error: 'Failed to generate share link' });
+    }
+  });
+
+  app.delete('/api/projects/:id/share', async (req, res) => {
+    try {
+      const projectId = parseInt(req.params.id);
+      if (isNaN(projectId)) {
+        return res.status(400).json({ error: 'Invalid project ID' });
+      }
+
+      const success = await storage.revokeShareToken(projectId);
+      if (success) {
+        res.json({ message: 'Share link revoked successfully' });
+      } else {
+        res.status(500).json({ error: 'Failed to revoke share link' });
+      }
+    } catch (error) {
+      console.error('Failed to revoke share token:', error);
+      res.status(500).json({ error: 'Failed to revoke share link' });
+    }
+  });
+
+  app.get('/api/shared/:token', async (req, res) => {
+    try {
+      const { token } = req.params;
+      const project = await storage.getProjectByShareToken(token);
+      
+      if (!project) {
+        return res.status(404).json({ error: 'Project not found or link expired' });
+      }
+
+      res.json(project);
+    } catch (error) {
+      console.error('Failed to get shared project:', error);
+      res.status(500).json({ error: 'Failed to access shared project' });
+    }
+  });
+
   // Project descriptions routes
   app.get('/api/projects/:id/descriptions', async (req, res) => {
     try {
