@@ -1,6 +1,7 @@
 import { users, projects, projectDescriptions, settings, type User, type InsertUser, type Project, type InsertProject, type UpdateProject, type ProjectDescription, type InsertProjectDescription, type UpdateProjectDescription, type Settings, type InsertSettings, type UpdateSettings } from "@shared/schema";
 import { db } from "./db";
 import { eq, ne, or, sql, desc } from "drizzle-orm";
+import crypto from "crypto";
 
 export interface IStorage {
   // User methods
@@ -20,6 +21,7 @@ export interface IStorage {
 
   // Project methods
   getProject(id: number): Promise<Project | undefined>;
+  getProjectByShareToken(token: string): Promise<Project | undefined>;
   getAllProjects(): Promise<Project[]>;
   getProjectsByUser(userId: number): Promise<Project[]>;
   getProjectsByTeamMember(memberId: number): Promise<Project[]>;
@@ -28,6 +30,8 @@ export interface IStorage {
   deleteProject(id: number): Promise<boolean>;
   searchProjects(query: string): Promise<Project[]>;
   getProjectTitles(): Promise<string[]>;
+  generateShareToken(projectId: number, expiryDays?: number): Promise<string>;
+  revokeShareToken(projectId: number): Promise<boolean>;
 
   // Inbox methods
   getInboxMessages(userId: number): Promise<any[]>;
@@ -387,6 +391,76 @@ export class DatabaseStorage implements IStorage {
     } catch (error) {
       console.error('Error creating settings:', error);
       throw error;
+    }
+  }
+
+  async getProjectByShareToken(token: string): Promise<Project | undefined> {
+    try {
+      const result = await db
+        .select()
+        .from(projects)
+        .where(eq(projects.shareToken, token))
+        .limit(1);
+      
+      const project = result[0];
+      if (!project) return undefined;
+      
+      // Check if token is expired
+      if (project.shareExpiry) {
+        const expiry = new Date(project.shareExpiry);
+        if (expiry < new Date()) {
+          // Token expired, revoke it
+          await this.revokeShareToken(project.id);
+          return undefined;
+        }
+      }
+      
+      return project;
+    } catch (error) {
+      console.error('Error getting project by share token:', error);
+      return undefined;
+    }
+  }
+
+  async generateShareToken(projectId: number, expiryDays: number = 30): Promise<string> {
+    try {
+      const token = crypto.randomBytes(32).toString('hex');
+      const expiry = new Date();
+      expiry.setDate(expiry.getDate() + expiryDays);
+      
+      await db
+        .update(projects)
+        .set({
+          shareToken: token,
+          shareExpiry: expiry,
+          isPubliclyShared: true,
+          updatedAt: new Date()
+        })
+        .where(eq(projects.id, projectId));
+      
+      return token;
+    } catch (error) {
+      console.error('Error generating share token:', error);
+      throw error;
+    }
+  }
+
+  async revokeShareToken(projectId: number): Promise<boolean> {
+    try {
+      await db
+        .update(projects)
+        .set({
+          shareToken: null,
+          shareExpiry: null,
+          isPubliclyShared: false,
+          updatedAt: new Date()
+        })
+        .where(eq(projects.id, projectId));
+      
+      return true;
+    } catch (error) {
+      console.error('Error revoking share token:', error);
+      return false;
     }
   }
 }

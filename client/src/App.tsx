@@ -16,6 +16,7 @@ import ForgotPasswordPage from "@/pages/forgot-password";
 import ResetPasswordPage from "@/pages/reset-password";
 import MemberProjectsPage from "@/pages/member-projects";
 import AdminPanel from "@/pages/admin-panel";
+import SharedProject from "@/pages/shared-project";
 import NotFound from "@/pages/not-found";
 
 function Router() {
@@ -33,6 +34,7 @@ function Router() {
       <Route path="/reset-password" component={ResetPasswordPage} />
       <Route path="/member/:memberId/projects" component={MemberProjectsPage} />
       <Route path="/admin" component={AdminPanel} />
+      <Route path="/shared/:token" component={SharedProject} />
       <Route component={NotFound} />
     </Switch>
   );
