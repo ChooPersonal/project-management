@@ -5,7 +5,7 @@ import { Toaster } from "./components/ui/toaster";
 import { TooltipProvider } from "./components/ui/tooltip";
 import { ThemeProvider } from "./components/theme-provider";
 import Dashboard from "./pages/dashboard";
-import ProjectDetail from "./pages/project-detail";
+import ProjectDetail from "./pages/project-detail.tsx";
 import TeamPage from "./pages/team";
 import TimelinePage from "./pages/timeline";
 import AllProjectsPage from "./pages/all-projects";
